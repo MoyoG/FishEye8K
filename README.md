@@ -30,7 +30,7 @@ https://github.com/MoyoG/FishEye8K/assets/10125947/89b1f6d4-624a-4822-bd3a-890cd
     <img src="https://github.com/MoyoG/FishEye8K/assets/10125947/0a291e9e-43e2-41a1-89ff-e29630a57cab">
 </p>
 
-# Some Experimental results 
+# Experimental results 
 
 | Model      | Version   | Input Size | Precision | Recall | mAP0.5 | mAP.5-.95 | f1\-score | APS    | APM    | APL    | Inference[ms] |
 | ---------- | --------- | ---------- | --------- | ------ | ------ | --------- | --------- | ------ | ------ | ------ | ------------- |

@@ -16,11 +16,11 @@ https://github.com/MoyoG/FishEye8K/assets/73123564/f7dd27db-7613-4e2c-b5f0-ec33c
 
                          
 **Classes (Color)**
-- Bus (Red)
-- Bike (Blue)
-- Car (Green)
-- Pedestrian (Yellow)
-- Truck (Purple)
+- ![#FF3333](https://placehold.co/15x15/FF3333/FF3333.png) - Bus 
+- ![#3358FF](https://placehold.co/15x15/3358FF/3358FF.png) - Bike
+- ![#33FF33](https://placehold.co/15x15/33FF33/33FF33.png) - Car
+- ![#F6FF33](https://placehold.co/15x15/F6FF33/F6FF33.png) - Pedestrian
+- ![#9F33FF](https://placehold.co/15x15/9F33FF/9F33FF.png) - Truck
 
 
 # Dataset

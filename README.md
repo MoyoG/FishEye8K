@@ -1,5 +1,7 @@
-# FishEye8K
-FishEye8K: A Benchmark and Dataset for Fisheye Camera Object Detection
+# FishEye8K: A Benchmark and Dataset for Fisheye Camera Object Detection
+
+**Authors:**
+[Munkhjargal Gochoo](https://github.com/moyog/), [Munkh-Erdene Otgonbold](https://github.com/omunkhuush/), Erkhembayar Ganbold, Jun-Wei Hsieh, Ming-Ching Chang, Ping-Yang Chen, Byambaa Dorj, Hamad Al Jassmi, [Ganzorig Batnasan](https://github.com/ganzob/), Fady Alnajjar, Mohammed Abduljabbar, Fang-Pang Lin
 
 <p align="center" width="100%">
     <img width="100%" src="https://github.com/MoyoG/FishEye8K/assets/10125947/5e53c3bb-3bde-48fe-a287-327c05da08ce">

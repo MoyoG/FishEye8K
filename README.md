@@ -25,7 +25,7 @@ https://github.com/MoyoG/FishEye8K/assets/73123564/f7dd27db-7613-4e2c-b5f0-ec33c
 
 # Dataset
 - [Click to download the Fisheye8k dataset](https://scidm.nchc.org.tw/en/dataset/fisheye8k)
-- [Click to download the paper]()
+- [Click to download the paper](https://arxiv.org/abs/2305.17449)
 
 # Train and Test 
 
@@ -49,4 +49,12 @@ https://github.com/MoyoG/FishEye8K/assets/73123564/f7dd27db-7613-4e2c-b5f0-ec33c
 |            | YOLOv8x   | 640        | 0.8418    | 0.3665 | 0.6146 | 0.4029    | 0.5106    | 0.0997 | 0.4147 | 0.7083 | 13.4          |
 
 # Citation
-
+Arxiv
+@misc{gochoo2023fisheye8k,
+      title={FishEye8K: A Benchmark and Dataset for Fisheye Camera Object Detection}, 
+      author={Munkhjargal Gochoo and Munkh-Erdene Otgonbold and Erkhembayar Ganbold and Jun-Wei Hsieh and Ming-Ching Chang and Ping-Yang Chen and Byambaa Dorj and Hamad Al Jassmi and Ganzorig Batnasan and Fady Alnajjar and Mohammed Abduljabbar and Fang-Pang Lin},
+      year={2023},
+      eprint={2305.17449},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}

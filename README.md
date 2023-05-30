@@ -52,6 +52,7 @@ https://github.com/MoyoG/FishEye8K/assets/73123564/f7dd27db-7613-4e2c-b5f0-ec33c
 
 # Citation
 Arxiv
+```
 @misc{gochoo2023fisheye8k,
       title={FishEye8K: A Benchmark and Dataset for Fisheye Camera Object Detection}, 
       author={Munkhjargal Gochoo and Munkh-Erdene Otgonbold and Erkhembayar Ganbold and Jun-Wei Hsieh and Ming-Ching Chang and Ping-Yang Chen and Byambaa Dorj and Hamad Al Jassmi and Ganzorig Batnasan and Fady Alnajjar and Mohammed Abduljabbar and Fang-Pang Lin},

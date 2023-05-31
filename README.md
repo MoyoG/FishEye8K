@@ -37,6 +37,11 @@ https://github.com/MoyoG/FishEye8K/assets/73123564/f7dd27db-7613-4e2c-b5f0-ec33c
 
 # Experimental results 
 
+We evaluated using default yolo test.py 
+
+- conf_thres=0.5  
+- iou_thres=0.5
+
 | Model      | Version   | Input Size | Precision | Recall | mAP0.5 | mAP.5-.95 | f1\-score | APS    | APM    | APL    | Inference[ms] |
 | ---------- | --------- | ---------- | --------- | ------ | ------ | --------- | --------- | ------ | ------ | ------ | ------------- |
 | YOLOv5     | YOLOv5l6  | 1280       | 0.7929    | 0.4076 | 0.6139 | 0.4098    | 0.535     | 0.1299 | 0.434  | 0.6665 | 22.7          |

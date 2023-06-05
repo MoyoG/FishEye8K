@@ -25,7 +25,7 @@ https://github.com/MoyoG/FishEye8K/assets/73123564/f7dd27db-7613-4e2c-b5f0-ec33c
 
 # Dataset
 - [Click to download the Fisheye8K dataset](https://scidm.nchc.org.tw/en/dataset/fisheye8k)
-- If you want to install whole dataset at once, choose **Fisheye8K_all_including_train_test.zip**
+- If you want to download whole dataset at once, choose **Fisheye8K_all_including_train_test.zip**
 - Click on "**Explore**" and "**Go to resource**"
 
 <p align="center" width="100%">

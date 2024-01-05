@@ -38,8 +38,9 @@ https://github.com/MoyoG/FishEye8K/assets/73123564/f7dd27db-7613-4e2c-b5f0-ec33c
 # Train and Test 
 
 <p align="center" width="100%">
-    <img src="https://github.com/MoyoG/FishEye8K/assets/10125947/0a291e9e-43e2-41a1-89ff-e29630a57cab">
+    <img src="https://github.com/MoyoG/FishEye8K/assets/73123564/1f92b602-2f59-4515-938d-f5eca8471a6e">
 </p>
+
 
 # Experimental results 
 

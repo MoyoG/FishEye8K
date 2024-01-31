@@ -28,6 +28,9 @@ https://github.com/MoyoG/FishEye8K/assets/73123564/f7dd27db-7613-4e2c-b5f0-ec33c
 - If you want to download whole dataset at once, choose **Fisheye8K_all_including_train_test.zip**
 - Click on "**Explore**" and "**Go to resource**"
 
+![FishEye8K download](https://github.com/MoyoG/FishEye8K/assets/10125947/a647e24c-e716-4317-8dc5-0dc31f369ee2)
+
+
 <p align="center" width="100%">
     <img src="https://github.com/MoyoG/FishEye8K/assets/73123564/847fca10-d970-4ccc-96cf-dd1de68df624">
 </p>

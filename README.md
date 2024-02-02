@@ -30,7 +30,7 @@ https://github.com/MoyoG/FishEye8K/assets/73123564/f7dd27db-7613-4e2c-b5f0-ec33c
 
 ![FishEye8K download](https://github.com/MoyoG/FishEye8K/assets/10125947/a647e24c-e716-4317-8dc5-0dc31f369ee2)
 
-- Note: If you downloaded the older version **Fisheye8K_all_including_train&test_1.zip** before Jan 28, **MS COCO (train.json and test.json) labels should be replaced** with these updated versions [Click here to download correct MS COCO labels](https://alumniuaeuac-my.sharepoint.com/personal/mgochoo_uaeu_ac_ae/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fmgochoo%5Fuaeu%5Fac%5Fae%2FDocuments%2FReplace&ga=1)
+- Note: If you downloaded the older version **Fisheye8K_all_including_train&test_1.zip** before Jan 28, **MS COCO (train.json and test.json) labels should be replaced** with these updated versions [Click here to download correct MS COCO labels](https://drive.google.com/drive/folders/1J4nYmTwXoDc47_2tq4aSCXBkkrCxTCP3?usp=sharing)
 
 # Paper
 - [Click to download the paper](https://openaccess.thecvf.com/content/CVPR2023W/AICity/html/Gochoo_FishEye8K_A_Benchmark_and_Dataset_for_Fisheye_Camera_Object_Detection_CVPRW_2023_paper.html?fbclid=IwAR2UCUtrPydcCFxRjN67d7RyAyX-dNJAEi7mWPJjWhX3kTUA_SQ4AJyaFWc)

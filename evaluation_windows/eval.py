@@ -2,9 +2,9 @@ from pycocotools.coco import COCO
 from pycocotools.cocoeval import COCOeval
 
 
-coco_gt = COCO('groundtruth.json')
+coco_gt = COCO('../../../evaluation/Fisheye8K/groundtruth.json')
 coco_dt = coco_gt.loadRes(
-    'detection_dgx.json')
+    '../../../evaluation/Fisheye8K/detections.json')
 
 print(type(coco_dt))
 print(type(coco_gt))

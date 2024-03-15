@@ -248,6 +248,8 @@ class COCOeval:
             return None
 
         for g in gt:
+            if g['ignore']:
+                print(g['ignore'])
             if g['ignore'] or (g['area']<aRng[0] or g['area']>aRng[1]):
                 g['_ignore'] = 1
             else:
@@ -332,8 +334,11 @@ class COCOeval:
         A           = len(p.areaRng)
         M           = len(p.maxDets)
         precision   = -np.ones((T,R,K,A,M)) # -1 for the precision of absent categories
+        precision_new = -np.ones((T,K,A,M))
         recall      = -np.ones((T,K,A,M))
+        f1_score   = -np.ones((T,K,A,M))
         scores      = -np.ones((T,R,K,A,M))
+
 
         # create dictionary for future indexing
         _pe = self._paramsEval
@@ -350,31 +355,31 @@ class COCOeval:
         I0 = len(_pe.imgIds)
         A0 = len(_pe.areaRng)
         # retrieve E at each category, area range, and max number of detections
-        for k, k0 in enumerate(k_list):
-            Nk = k0*A0*I0
-            for a, a0 in enumerate(a_list):
-                Na = a0*I0
-                for m, maxDet in enumerate(m_list):
-                    E = [self.evalImgs[Nk + Na + i] for i in i_list]
+        
+        for k, k0 in enumerate(k_list): # catIDs
+            Nk = k0*A0*I0 # k0 * 4 * 1000
+
+            for a, a0 in enumerate(a_list):  #areaRanges
+                Na = a0*I0 # a0 * 1000 for a0 =0,1,2,3
+                for m, maxDet in enumerate(m_list):  #maxDets 1,10,100
+                    E = [self.evalImgs[Nk + Na + i] for i in i_list] # k0 *4 *1000 + a0*1000 + i
                     E = [e for e in E if not e is None]
                     if len(E) == 0:
                         continue
                     dtScores = np.concatenate([e['dtScores'][0:maxDet] for e in E])
-
                     # different sorting method generates slightly different results.
                     # mergesort is used to be consistent as Matlab implementation.
                     inds = np.argsort(-dtScores, kind='mergesort')
                     dtScoresSorted = dtScores[inds]
-
                     dtm  = np.concatenate([e['dtMatches'][:,0:maxDet] for e in E], axis=1)[:,inds]
                     dtIg = np.concatenate([e['dtIgnore'][:,0:maxDet]  for e in E], axis=1)[:,inds]
                     gtIg = np.concatenate([e['gtIgnore'] for e in E])
                     npig = np.count_nonzero(gtIg==0 )
+
                     if npig == 0:
                         continue
                     tps = np.logical_and(               dtm,  np.logical_not(dtIg) )
                     fps = np.logical_and(np.logical_not(dtm), np.logical_not(dtIg) )
-
                     tp_sum = np.cumsum(tps, axis=1).astype(dtype=float)
                     fp_sum = np.cumsum(fps, axis=1).astype(dtype=float)
                     for t, (tp, fp) in enumerate(zip(tp_sum, fp_sum)):
@@ -385,11 +390,14 @@ class COCOeval:
                         pr = tp / (fp+tp+np.spacing(1))
                         q  = np.zeros((R,))
                         ss = np.zeros((R,))
-
+                        
                         if nd:
                             recall[t,k,a,m] = rc[-1]
+                            precision_new[t,k,a,m] = pr[-1]
+                            f1_score[t,k,a,m] = 2*pr[-1]*rc[-1]/(pr[-1]+rc[-1]+1e-9)
                         else:
                             recall[t,k,a,m] = 0
+                            precision_new[t,k,a,m] = 0
 
                         # numpy is slow without cython optimization for accessing elements
                         # use python array gets significant speed improvement
@@ -398,7 +406,6 @@ class COCOeval:
                         for i in range(nd-1, 0, -1):
                             if pr[i] > pr[i-1]:
                                 pr[i-1] = pr[i]
-
                         inds = np.searchsorted(rc, p.recThrs, side='left')
                         try:
                             for ri, pi in enumerate(inds):
@@ -409,12 +416,15 @@ class COCOeval:
                         precision[t,:,k,a,m] = np.array(q)
                         scores[t,:,k,a,m] = np.array(ss)
         self.eval = {
+
             'params': p,
             'counts': [T, R, K, A, M],
             'date': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
             'precision': precision,
             'recall':   recall,
             'scores': scores,
+            'precision_new':precision_new,
+            'f1_score':f1_score
         }
         toc = time.time()
         print('DONE (t={:0.2f}s).'.format( toc-tic))
@@ -426,9 +436,24 @@ class COCOeval:
         '''
         def _summarize( ap=1, iouThr=None, areaRng='all', maxDets=100 ):
             p = self.params
-            iStr = ' {:<18} {} @[ IoU={:<9} | area={:>6s} | maxDets={:>3d} ] = {:0.3f}'
-            titleStr = 'Average Precision' if ap == 1 else 'Average Recall'
-            typeStr = '(AP)' if ap==1 else '(AR)'
+            iStr = ' {:<30} {} @[ IoU={:<9} | area={:>6s} | maxDets={:>3d} ] = {:0.3f}'
+            if ap == 1 :
+                titleStr = 'Average area under PR curve' 
+            elif ap==0 :
+                titleStr = 'Average Recall' 
+            elif ap ==2:
+                titleStr = 'Average f1 score'
+            else:
+                titleStr = 'Average Precision'
+            
+            if ap==1 :
+                typeStr = '(mAP)' 
+            elif ap==0: 
+                typeStr ='(AR)' 
+            elif ap ==2:
+                typeStr = 'F1'
+            else:
+                typeStr = 'AP'
             iouStr = '{:0.2f}:{:0.2f}'.format(p.iouThrs[0], p.iouThrs[-1]) \
                 if iouThr is None else '{:0.2f}'.format(iouThr)
 
@@ -442,9 +467,23 @@ class COCOeval:
                     t = np.where(iouThr == p.iouThrs)[0]
                     s = s[t]
                 s = s[:,:,:,aind,mind]
-            else:
+            elif ap==0:
                 # dimension of recall: [TxKxAxM]
                 s = self.eval['recall']
+                
+                if iouThr is not None:
+                    t = np.where(iouThr == p.iouThrs)[0]
+                    s = s[t]
+                s = s[:,:,aind,mind] 
+            elif ap ==2:
+                s = self.eval['f1_score']
+                if iouThr is not None:
+                    t = np.where(iouThr == p.iouThrs)[0]
+                    s = s[t]
+                s = s[:,:,aind,mind]
+            else:
+                # dimension of precision_new: [TxKxAxM]
+                s = self.eval['precision_new']
                 if iouThr is not None:
                     t = np.where(iouThr == p.iouThrs)[0]
                     s = s[t]
@@ -456,7 +495,7 @@ class COCOeval:
             print(iStr.format(titleStr, typeStr, iouStr, areaRng, maxDets, mean_s))
             return mean_s
         def _summarizeDets():
-            stats = np.zeros((12,))
+            stats = np.zeros((24,))
             stats[0] = _summarize(1)
             stats[1] = _summarize(1, iouThr=.5, maxDets=self.params.maxDets[2])
             stats[2] = _summarize(1, iouThr=.75, maxDets=self.params.maxDets[2])
@@ -469,6 +508,18 @@ class COCOeval:
             stats[9] = _summarize(0, areaRng='small', maxDets=self.params.maxDets[2])
             stats[10] = _summarize(0, areaRng='medium', maxDets=self.params.maxDets[2])
             stats[11] = _summarize(0, areaRng='large', maxDets=self.params.maxDets[2])
+            stats[12] = _summarize(-1, maxDets=self.params.maxDets[0])
+            stats[13] = _summarize(-1, maxDets=self.params.maxDets[1])
+            stats[14] = _summarize(-1, maxDets=self.params.maxDets[2])
+            stats[15] = _summarize(-1, areaRng='small', maxDets=self.params.maxDets[2])
+            stats[16] = _summarize(-1, areaRng='medium', maxDets=self.params.maxDets[2])
+            stats[17] = _summarize(-1, areaRng='large', maxDets=self.params.maxDets[2])
+            stats[18] = _summarize(2, maxDets=self.params.maxDets[0])
+            stats[19] = _summarize(2, maxDets=self.params.maxDets[1])
+            stats[20] = _summarize(2, maxDets=self.params.maxDets[2])
+            stats[21] = _summarize(2, areaRng='small', maxDets=self.params.maxDets[2])
+            stats[22] = _summarize(2, areaRng='medium', maxDets=self.params.maxDets[2])
+            stats[23] = _summarize(2, areaRng='large', maxDets=self.params.maxDets[2])            
             return stats
         def _summarizeKps():
             stats = np.zeros((10,))

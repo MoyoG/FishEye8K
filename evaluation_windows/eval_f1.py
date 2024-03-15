@@ -8,7 +8,6 @@ gt_image_ids = coco_gt.getImgIds()
 
 print("Total images ", len(gt_image_ids))
 
-
 with open('detections.json', 'r') as f:
     detection_data = json.load(f)
 
@@ -23,6 +22,7 @@ coco_eval = COCOeval(coco_gt, coco_dt, 'bbox')
 coco_eval.evaluate()
 coco_eval.accumulate()
 coco_eval.summarize()
+
 print('----------------------------------------')
 print('AP_0.5-0.95', coco_eval.stats[0])
 print('AP_0.5', coco_eval.stats[1])

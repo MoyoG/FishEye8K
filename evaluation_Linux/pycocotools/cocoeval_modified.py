@@ -398,7 +398,7 @@ class COCOeval:
                         else:
                             recall[t,k,a,m] = 0
                             precision_new[t,k,a,m] = 0
-
+                            f1_score[t,k,a,m] = 0
                         # numpy is slow without cython optimization for accessing elements
                         # use python array gets significant speed improvement
                         pr = pr.tolist(); q = q.tolist()

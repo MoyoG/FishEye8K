@@ -4,4 +4,7 @@ from ultralytics import YOLO
 model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
 
 # Train the model
-results = model.train(data="data/Fisheye8k.yaml", epochs=100, imgsz=640)
+results = model.train(data="data/Fisheye8k.yaml",
+                       epochs=100,
+                        batch =32,
+                        imgsz=640)

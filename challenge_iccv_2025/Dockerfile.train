@@ -1,0 +1,6 @@
+FROM ultralytics/ultralytics:latest
+
+WORKDIR /app
+COPY . .
+# COPY /data /app/data
+ENTRYPOINT ["python", "run_train_yolo.py"]

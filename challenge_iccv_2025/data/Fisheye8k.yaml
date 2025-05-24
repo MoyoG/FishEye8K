@@ -1,0 +1,8 @@
+path: /data/Fisheye8K
+train: train/images
+val: test/images
+
+nc: 5
+
+# class names
+names: ['Bus','Bike','Car','Pedestrian','Truck']

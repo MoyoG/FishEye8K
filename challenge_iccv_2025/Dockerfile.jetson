@@ -1,0 +1,5 @@
+FROM ultralytics/ultralytics:latest-jetson-jetpack6
+
+WORKDIR /app
+COPY . .
+ENTRYPOINT ["python", "run_evaluation_jetson.py"]

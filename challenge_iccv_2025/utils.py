@@ -22,14 +22,10 @@ def f1_score(predictions_path, ground_truths_path):
     coco_eval.evaluate()
     coco_eval.accumulate()
     coco_eval.summarize()
-    try:
-        os.remove('./temp.json')
-    except OSError:
-        print("Temporary file not found, skipping deletion.")
     
     # Assuming the F1 score is at index 20 in the stats array
-    # return coco_eval.stats[20]  # Return the F1 score from the evaluation stats
-    return 0.85  # Simulated constant value for demo purposes
+    return coco_eval.stats[20]  # Return the F1 score from the evaluation stats
+    # return 0.85  # Simulated constant value for demo purposes
 
 def get_model(model_path):
     if not os.path.exists(model_path):
@@ -44,5 +40,17 @@ def preprocess_image(image):
 
     return image
 def postprocess_result(results):
-        boxes = results[0].boxes.xyxy.cpu().numpy().tolist() if results[0].boxes else []
-        return boxes
+    if not results or len(results) == 0:
+        return []
+    boxes = results[0].boxes.xyxy.cpu().numpy().tolist()        # shape: (N, 4)
+    scores = results[0].boxes.conf.cpu().numpy().tolist()       # shape: (N,)
+    classes = results[0].boxes.cls.cpu().numpy().tolist()       # shape: (N,)
+
+    return [boxes, scores, classes] 
+def changeId(id):
+    sceneList = ['M', 'A', 'E', 'N']
+    cameraId = int(id.split('_')[0].split('camera')[1])
+    sceneId = sceneList.index(id.split('_')[1])
+    frameId = int(id.split('_')[2])
+    imageId = int(str(cameraId)+str(sceneId)+str(frameId))
+    return imageId

@@ -1,0 +1,5 @@
+path: /data
+
+val: Fisheye1K_eval/images
+nc: 5
+names: ['Bus','Bike','Car','Pedestrian','Truck']

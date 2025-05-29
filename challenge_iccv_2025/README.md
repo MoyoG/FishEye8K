@@ -2,6 +2,8 @@
 
 This guide provides a quick start tutorial for container submissions using a fine-tuned YOLOv11n model as a reference.
 
+**You should develop your own implementations of the get_model, preprocess_image, and postprocess_results functions in utils.py for your submission. Prize winners need to place their pretraining data (if applicable) and models in the shared Google Drive and upload training and evaluation containers on Docker Hub. Your training and evaluation scripts inside the container should load models from the mounted /models directory and the data from the /data directory. **
+
 # Evaluation Container Submission Guide
 
 ## 🔹 Pull the Prebuilt Docker Image
@@ -38,7 +40,6 @@ The `run_evaluation_jetson.py` script inside the container expects the following
 - `models/yolo11n_fisheye8k.pt`  
   The fine-tuned YOLOv11n model file used for inference.
   
-**You should develop your own implementations of the get_model, preprocess_image, and postprocess_results functions in utils.py for your submission.**
 
 
 # Training Container Guide

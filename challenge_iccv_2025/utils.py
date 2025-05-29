@@ -32,8 +32,14 @@ def get_model(model_path):
         raise FileNotFoundError(f"Model file {model_path} does not exist.")
     # You need to implement your model here
     model = YOLO(model_path)
-    return model
-def preprocess_image(image):
+    model.export(format="engine")  # creates 'yolo11n.engine'
+    engine_path = model_path.replace(".pt",".engine")
+    # Load the exported TensorRT model
+    trt_model = YOLO(engine_path)
+
+    return trt__model
+def preprocess_image(image_path):
+    image = cv2.imread(image_path)
     if image is None:
         raise ValueError("Input image is None.")
     # Preprocess the image for your own model

@@ -4,7 +4,7 @@ This guide provides a quick start tutorial for container submissions using a fin
 
 **You should develop your own implementations of the get_model, preprocess_image, and postprocess_results functions in utils.py for your submission. Prize winners need to place their pretraining data (if applicable) and models in the shared Google Drive and upload training and evaluation containers on Docker Hub. Your training and evaluation scripts inside the container should load models from the mounted /models directory and the data from the /data directory.**
 
-# Evaluation Container Submission Guide
+# Evaluation Container Instruction
 
 ## 🔹 Pull the Prebuilt Docker Image
 
@@ -42,7 +42,7 @@ The `run_evaluation_jetson.py` script inside the container expects the following
   
 
 
-# Training Container Guide
+# Training Container Instruction
 
 This section provides a getting started guide for setting up and running the training Docker container for the challenge, which uses a YOLOv11n model finetuning pipeline.
 

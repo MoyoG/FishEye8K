@@ -37,7 +37,7 @@ def get_model(model_path):
     # Load the exported TensorRT model
     trt_model = YOLO(engine_path)
 
-    return trt__model
+    return trt_model
 def preprocess_image(image_path):
     image = cv2.imread(image_path)
     if image is None:

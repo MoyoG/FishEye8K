@@ -38,13 +38,11 @@ def get_model(model_path):
     trt_model = YOLO(engine_path)
 
     return trt_model
-def preprocess_image(image_path):
-    image = cv2.imread(image_path)
-    if image is None:
+def preprocess_image(img):
+    if img is None:
         raise ValueError("Input image is None.")
     # Preprocess the image for your own model
-
-    return image
+    return img
 def postprocess_result(results):
     if not results or len(results) == 0:
         return []
